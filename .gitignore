@@ -1,0 +1,8 @@
+.gitattributes
+.vs
+.git
+lab1/bin/*
+lab1/obj/*
+
+lab1.sln
+lab1/lab1.csproj
