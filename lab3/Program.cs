@@ -11,8 +11,8 @@ var conn = new SqlConnection(connectionString);
 
 var regionToInsert = new Region()
 {
-    RegionId = 6,
-    RegionDescription = "test2"
+    RegionId = 7,
+    RegionDescription = "test3"
 };
 
 var insertResult = conn.Execute(
