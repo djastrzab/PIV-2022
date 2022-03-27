@@ -16,7 +16,7 @@ var regionToInsert = new Region()
 };
 
 var insertResult = conn.Execute(
-    "INSERT INTO Region (RegionID , RegionDescription) VALUES (@Id, @Description)",
+    "INSERT INTO Region (RegionID , RegionDescription) VALUES (@RegionId, @RegionDescription)",
     regionToInsert);
 
 var result = conn.Query<Region>("SELECT * FROM Region");
