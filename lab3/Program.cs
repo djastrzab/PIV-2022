@@ -9,19 +9,24 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
 
 var conn = new SqlConnection(connectionString);
 
-var regionToInsert = new Region()
-{
-    RegionId = 7,
-    RegionDescription = "test3"
-};
-
-var insertResult = conn.Execute(
-    "INSERT INTO Region (RegionID , RegionDescription) VALUES (@RegionId, @RegionDescription)",
-    regionToInsert);
 
 var result = conn.Query<Region>("SELECT * FROM Region");
 
 foreach (var item in result)
 {
     Console.WriteLine($"{item.RegionId}: {item.RegionDescription}");
+}
+
+var joinResult = conn.Query<Product, Category, Product>("SELECT * FROM Products p " +
+    "JOIN Categories c on p.CategoryID = c.CategoryID",
+    (product, category) =>
+    {
+        product.Category = category;
+        return product;
+
+    });
+
+foreach (var item in joinResult)
+{
+    Console.WriteLine($"{item.ProductName}:{item.Category.CategoryName}");
 }
