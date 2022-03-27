@@ -7,7 +7,8 @@ string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=N
 
 string getQueryString = "SELECT * FROM dbo.Categories";
 
-
+string insertString = " INSERT INTO dbo.Categories (CategoryName," +
+    "Description) Values ('Weird thing','It is really weird') ";
 
 
 using (SqlConnection connection =
@@ -15,12 +16,12 @@ using (SqlConnection connection =
 {
     SqlCommand commandRead = new SqlCommand(getQueryString, connection);
 
-    SqlCommand commandInsert = new SqlCommand(getQueryString, connection);
-
+    SqlCommand commandInsert = new SqlCommand(insertString, connection);
 
     try
     {
         connection.Open();
+        Int32 recordsAffected = commandInsert.ExecuteNonQuery();
         SqlDataReader reader = commandRead.ExecuteReader();
         while (reader.Read())
         {
