@@ -9,16 +9,15 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
 
 var conn = new SqlConnection(connectionString);
 
-
+var regionToInsert = new Region()
+{
+    RegionId = 6,
+    RegionDescription = "test2"
+};
 
 var insertResult = conn.Execute(
     "INSERT INTO Region (RegionID , RegionDescription) VALUES (@RegionId, @RegionDescription)",
-    new
-    {
-        RegionId=7,
-        RegionDescription="test3"
-    }
-    );
+    regionToInsert);
 
 var result = conn.Query<Region>("SELECT * FROM Region");
 
