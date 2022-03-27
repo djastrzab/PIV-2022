@@ -6,6 +6,12 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
  "TrustServerCertificate=False;ApplicationIntent=ReadWrite; " +
  "MultiSubnetFailover=False";
 
-using (var connection = new SqlConnection(connectionString)) ;
+var conn = new SqlConnection(connectionString);
+var result=conn.Query<lab3.Region>("SELECT * FROM Region");
+
+foreach (var item in result)
+{
+       Console.WriteLine($"{item.RegionId}: {item.RegionDescription}");
+}
 
 
