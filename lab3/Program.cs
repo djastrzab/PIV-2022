@@ -10,17 +10,17 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
 var conn = new SqlConnection(connectionString);
 
 
-var joinResult = conn.Query<Product, Category, Product>("SELECT * FROM Products p " +
-    "JOIN Categories c on p.CategoryID = c.CategoryID",
-    (product, category) =>
+var joinResult = conn.Query<Territory, Region, Territory>("SELECT * FROM Territories t " +
+    "JOIN Region r on t.RegionID = r.RegionID WHERE t.TerritoryDescription like 'p%'",
+    (territory, region) =>
     {
-        product.Category = category;
-        return product;
+        territory.Region = region;
+        return territory;
 
     },
-    splitOn:"CategoryId");
+    splitOn:"RegionID");
 
 foreach (var item in joinResult)
 {
-    Console.WriteLine($"{item.ProductName}:{item.Category.CategoryName}");
+    Console.WriteLine($"{item.TerritoryDescription}:{item.Region.RegionDescription}");
 }
