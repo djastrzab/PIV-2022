@@ -1,4 +1,5 @@
-﻿using Dapper;﻿
+﻿using Dapper;
+using lab3;
 using System.Data.SqlClient;
 
 var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Northwind;" +
@@ -7,11 +8,20 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
  "MultiSubnetFailover=False";
 
 var conn = new SqlConnection(connectionString);
-var result=conn.Query<lab3.Region>("SELECT * FROM Region");
+
+var regionToInsert = new Region()
+{
+    RegionId = 6,
+    RegionDescription = "test2"
+};
+
+var insertResult = conn.Execute(
+    "INSERT INTO Region (RegionID , RegionDescription) VALUES (@Id, @Description)",
+    regionToInsert);
+
+var result = conn.Query<Region>("SELECT * FROM Region");
 
 foreach (var item in result)
 {
-       Console.WriteLine($"{item.RegionId}: {item.RegionDescription}");
+    Console.WriteLine($"{item.RegionId}: {item.RegionDescription}");
 }
-
-
