@@ -7,8 +7,13 @@ string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=N
 
 string getQueryString = "SELECT * FROM dbo.Categories";
 
+string Name = "Something";
+SqlParameter[] sp = new SqlParameter[] { };
+
+
+
 string insertString = " INSERT INTO dbo.Categories (CategoryName," +
-    "Description) Values ('Weird thing','It is really weird') ";
+    "Description) Values (@Name,@Description) ";
 
 
 using (SqlConnection connection =
