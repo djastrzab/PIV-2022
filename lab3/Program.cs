@@ -17,7 +17,7 @@ var joinResult = conn.Query<Territory, Region, Territory>("SELECT * FROM Territo
         territory.Region = region;
         return territory;
 
-    },Search,
+    },new { Search = Search },
     splitOn:"RegionID");
 
 
