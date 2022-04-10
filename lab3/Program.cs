@@ -8,16 +8,16 @@ var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Nort
  "MultiSubnetFailover=False";
 
 var conn = new SqlConnection(connectionString);
-
+string Search = "P%";
 
 var joinResult = conn.Query<Territory, Region, Territory>("SELECT * FROM Territories t " +
-    "JOIN Region r on t.RegionID = r.RegionID WHERE t.TerritoryDescription like @search",
+    "JOIN Region r on t.RegionID = r.RegionID WHERE t.TerritoryDescription like @Search",
     (territory, region) =>
     {
         territory.Region = region;
         return territory;
 
-    },
+    },Search,
     splitOn:"RegionID");
 
 
