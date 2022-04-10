@@ -2,6 +2,8 @@
 
 var context = new MyDbContext();
 
+context.Database.BeginTransaction();
+
 var client = new Client()
 {
     Name = "Franciszek Kowalski",
@@ -13,7 +15,7 @@ var client = new Client()
 context.Clients.Add(client);
 
 context.SaveChanges();
-
+context.Database.CommitTransaction();
 var result = context.Clients
     .Where(Client => Client.Balance == 0)
     .ToArray();
