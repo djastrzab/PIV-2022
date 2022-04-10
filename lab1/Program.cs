@@ -6,14 +6,15 @@ string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=N
  "MultiSubnetFailover=False";
 
 string getQueryString = "SELECT * FROM dbo.Categories";
+string Name = "Something2";
+string Desc = "Desc2";
 
-string Name = "Something";
-SqlParameter[] sp = new SqlParameter[] { };
-
+SqlParameter SqlName = new System.Data.SqlClient.SqlParameter("Name", Name);
+SqlParameter SqlDesc = new System.Data.SqlClient.SqlParameter("Desc", Desc);
 
 
 string insertString = " INSERT INTO dbo.Categories (CategoryName," +
-    "Description) Values (@Name,@Description) ";
+    "Description) Values (@Name,@Desc) ";
 
 
 using (SqlConnection connection =
@@ -22,6 +23,8 @@ using (SqlConnection connection =
     SqlCommand commandRead = new SqlCommand(getQueryString, connection);
 
     SqlCommand commandInsert = new SqlCommand(insertString, connection);
+    commandInsert.Parameters.Add(SqlName);
+    commandInsert.Parameters.Add(SqlDesc);
 
     try
     {
