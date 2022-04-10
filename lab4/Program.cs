@@ -4,9 +4,9 @@ var context = new MyDbContext();
 
 var client = new Client()
 {
-    Name = "Jan Kowalski",
+    Name = "Franciszek Kowalski",
     Adress = "Szeroka Bielsko",
-    Balance =0
+    Balance = 150
 
 };
 
@@ -14,7 +14,9 @@ context.Clients.Add(client);
 
 context.SaveChanges();
 
-var result = context.Clients.ToList();
+var result = context.Clients
+    .Where(Client => Client.Balance == 0)
+    .ToArray();
 
 foreach(var item in result)
 {
