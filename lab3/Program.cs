@@ -11,7 +11,7 @@ var conn = new SqlConnection(connectionString);
 
 
 var joinResult = conn.Query<Territory, Region, Territory>("SELECT * FROM Territories t " +
-    "JOIN Region r on t.RegionID = r.RegionID WHERE t.TerritoryDescription like 'p%'",
+    "JOIN Region r on t.RegionID = r.RegionID WHERE t.TerritoryDescription like @search",
     (territory, region) =>
     {
         territory.Region = region;
@@ -19,6 +19,7 @@ var joinResult = conn.Query<Territory, Region, Territory>("SELECT * FROM Territo
 
     },
     splitOn:"RegionID");
+
 
 foreach (var item in joinResult)
 {
