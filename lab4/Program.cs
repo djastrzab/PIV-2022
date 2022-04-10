@@ -1,4 +1,5 @@
 ﻿using lab4;
+using lab4.NorthwindContext;
 
 var context = new MyDbContext();
 
@@ -24,3 +25,8 @@ foreach(var item in result)
 {
     Console.WriteLine(item.Name);
 }
+
+var ctx = new NorthwindContext();
+var regions = ctx.Regions.ToArray();
+foreach(var region in regions)
+    Console.WriteLine(region.RegionDescription);
