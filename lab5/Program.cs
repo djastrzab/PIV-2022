@@ -1,4 +1,6 @@
-﻿using lab5;
+﻿using Microsoft.EntityFrameworkCore;
+using lab5;
+
 
 
 Console.WriteLine("hello world");
@@ -7,6 +9,7 @@ var context = new MyDbContext();
 
 context.Database.EnsureCreated();
 
+/*
 context.Clients.Add(
     new Client
     {
@@ -25,5 +28,12 @@ myClient.Orders.Add(new Order()
 });
 
 context.Clients.Add(myClient);
+*/
+
+foreach (var item in context.Clients.Include(x=> x.Orders).ToList())
+{
+    Console.WriteLine(item.Name);
+}
+
 
 context.SaveChanges();
