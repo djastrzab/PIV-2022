@@ -13,4 +13,17 @@ context.Clients.Add(
         Name = "Jan Kowalski"
     }
     );
+
+var myClient = new Client()
+{
+    Name = "Paweł Kowalski"
+};
+
+myClient.Orders.Add(new Order()
+{
+    Price = 10
+});
+
+context.Clients.Add(myClient);
+
 context.SaveChanges();
