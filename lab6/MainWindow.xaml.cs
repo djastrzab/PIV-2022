@@ -20,9 +20,26 @@ namespace lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        int counter = 0;
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LinearGradientBrush myBrush = new LinearGradientBrush();
+            myBrush.GradientStops.Add(new GradientStop(Colors.Blue, counter*0.01));
+            myBrush.GradientStops.Add(new GradientStop(Colors.Orange, counter * 0.01));
+            myBrush.GradientStops.Add(new GradientStop(Colors.Red, counter * 0.02));
+
+            Button but = new Button();
+            but.Content = "click"+ ++counter;
+            but.Click += Button_Click;
+            but.Background = myBrush;
+            panel.Children.Add(but);
+        }
+
+        
     }
 }
